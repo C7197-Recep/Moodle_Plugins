@@ -1,0 +1,525 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>G1 Knowledge Practice Tests</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* {
+  box-sizing: border-box;
+  margin:0;
+  padding:0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  /*GOOGLE TRANSLATE BAR CALISINCA BOSLUK OLUSTURMAMASI ICIN*/
+  top:0 !important;
+  background: #f8f9fa;
+}
+
+/* Style the header */
+header {
+  padding: 10px;
+  text-align: center;
+  font-size: 20px;
+}
+
+/* Container for flexboxes */
+section {
+  display: -webkit-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Style the navigation menu */
+nav {
+  -webkit-flex: 2;
+  -ms-flex: 2;
+  flex: 2;
+  background: #f8f9fa;
+  padding: 10px;
+  text-align:justify;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* Style the content */
+#question {
+  -webkit-flex: 6;
+  -ms-flex: 6;
+  flex: 6;
+  padding: 10px;
+  background-color: #d1edf6;
+}
+#content {
+}
+.button{
+    text-align:right;
+}
+#question input{
+    margin-bottom: 10px;
+}
+#right {
+  -webkit-flex: 3;
+  -ms-flex: 3;
+  flex: 3;
+  background-color: #fff;
+}
+hr{
+    border-top: 2px solid #2ea5d7;
+}
+/* Style the footer */
+footer {
+  background-color: #fff;
+  text-align: right;
+  color: white;
+}
+button{
+    clear: left;
+    text-align: left;
+    padding: 5px;
+    margin: 5px 0;
+    font-size: 1em;
+    background:rgb(212, 175, 55);
+    color:black;
+    font-family:Arial, Helvetica, sans-serif;
+    border: 2px solid rgb(212, 175, 55);
+    border-radius: 5px;
+}
+
+
+#feedback{
+    background-color:#fcefdc;
+    height:auto;
+    padding:10px;
+}
+#end{
+    background-color:#b9c1c3;
+    height:auto;
+    padding:10px;
+}
+
+
+select{
+    font-size:15px;
+    border:1px solid lightblue;
+    margin:10px;
+}
+
+/*extractcontent fonksiyonu xml den içeriği alırken cümle arasına <br>
+koyuyor. o da cümle ortasında kayıklığa neden oluyor. nedenini çözemedim.
+o yüzden br yi yok etmek için bu css yi ekledim.
+*/
+label br{
+    display:none;
+}
+
+
+/*GOOGLE TRANSLATE BARI GIZLER*/
+.goog-te-banner-frame{
+    display:none;
+}
+.skiptranslate{
+    display:none;
+}
+#google_translate_element{
+    display:none;
+}
+
+/* Responsive layout - makes the menu and the content (inside the section) sit on top of each other instead of next to each other */
+@media (max-width: 600px) {
+  section {
+    -webkit-flex-direction: column;
+    flex-direction: column;
+  }
+  header{
+      margin:0;
+      padding:0;
+  }
+  h3{
+      font-size:16px;
+  }
+  #nav_2{
+      display:none;
+  }
+  #nav_3{
+      display:none;
+  }
+  ul{
+     height:20px;
+  }
+}
+@media (max-width: 800px) {
+  #right {
+    flex:none;
+    -webkit-flex:none;
+  }
+}
+</style>
+
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+
+<header>
+  <h3 id="title">Select A G1 Practice Test</h3>
+  <select id="select" class="notranslate" >
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+      <option value="tr">Türkçe</option>
+      <option value="hi">हिन्दी</option>
+      <option value="zh-CN">中国人</option>
+  </select>
+
+</header>
+
+<section>
+
+  <nav class="nav translate">
+    <ul>
+        <h3 id="number"><span id="nav_1">Question</span> <span id="qno">1</span></h3>
+        <br>
+        <p id="nav_2">You must give an answer to the current question and push submit button to proceed with the next question.</p>
+        <br>
+        <p id="nav_3">Think twice, answer once!</p>
+    </ul>
+  </nav>
+  
+    <article id="question" class="translate" >
+        
+        <div id="content" class="notranslate">
+            <img src="https://m.media-amazon.com/images/I/517tShY9igL._SL1500_.jpg" alt="" height="130px"  class="img-responsive atto_image_button_left" id="img">
+            <br><br>
+            <label id="qtext" for="answer">Is this a demo question?</label>
+            <br><br>
+            <input id="a0" type="radio" name="answer" value="Definitely, Yes" checked>
+            <label id="label-a0" for="a0">Definitely, Yes</label> 
+            <br>
+            <input id="a1" type="radio" name="answer" value="May Be">
+            <label id="label-a1" for="a1">May Be</label>
+            <br>
+            <input id="a2" type="radio" name="answer" value="Not Sure">
+            <label id="label-a2" for="a2">Not Sure</label>
+            <br>
+            <input id="a3" type="radio" name="answer" value="Definitely, No">
+            <label id="label-a3" for="a3">Definitely, No</label>  
+            <br>            
+        </div>
+        <div class="button">
+            <button id="submit_btn" onclick="submit()">Submit Your Answer</button>
+        </div>
+        <div id="feedback" style="display:none">
+            <p><span id="feedback_1">Your answer is </span> <span id="result"></span></p>
+            <p><span id="feedback_2">The correct answer is: </span></p>
+            <p id="correct"></p>
+            <div class="button" id="feedback_next_btn">
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+        <div id="end" style="display:none">
+            <p id="end_sentence">End Of The Test. Your Results : </p>
+            <p><span id="correct_sentence">Correct:</span> <span id="correct_count"></span></p>
+            <p><span id="wrong_sentence">Wrong:</span> <span id="wrong_count"></span></p>
+            <p id="restart_sentence">Push restart button to restart the test.</p>
+            
+            <div class="button">
+                <button id="restart_btn" onclick="restart()">Restart</button>
+            </div>
+        </div>
+    </article>
+    
+
+
+    <!--
+    <article id="right">
+        <hr><br>
+        <div id="instructions">
+            <span>Quiz instructions: </span>
+        </div>
+        <br><br><br>
+        <div id="timer">
+            <span>Think twice, submit once! You are not allowed to submit before: 0 seconds</span>
+        </div>  
+    </article>
+    -->
+</section>
+
+<footer>
+<div id="google_translate_element"></div>
+
+
+
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script type="text/javascript">
+
+function googleTranslateElementInit() {
+  /*DEFAULT DIL OLARAK en YAZARSAM SECENEKLERDE INGILIZCEYI GOSTERMIYOR. 
+  BU DA OTOMATIK CAGIRMADA HATAYA SEBEP OLUYOR. O YUZDEN OLMAYAN BIR DIL YAZDIM. */
+  new google.translate.TranslateElement({pageLanguage: 'uu'}, 'google_translate_element');
+}
+
+function changeLanguageByButtonClick() {
+  var language = document.getElementById("select").value;
+  var selectField = document.querySelector("#google_translate_element select");
+  for(var i=0; i < selectField.children.length; i++){
+    var option = selectField.children[i];
+    // find desired langauge and change the former language of the hidden selection-field 
+    if(option.value==language){
+       selectField.selectedIndex = i;
+       // trigger change event afterwards to make google-lib translate this side
+       selectField.dispatchEvent(new Event('change'));
+       break;
+    }
+  }
+}
+</script>
+
+
+</footer>
+
+<script>
+var xmlDoc;
+var x;
+var question_nu;
+var question_total;
+var correct_answer;
+var is_correct="incorrect.";
+
+  if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+      xmlhttp=new XMLHttpRequest();
+  }
+  else
+  {// code for IE6, IE5
+      xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+
+  xmlhttp.onload = function() {
+    xmlDoc = new DOMParser().parseFromString(xmlhttp.responseText,'text/xml');
+
+    console.log(xmlDoc);
+
+    //HEMEN BASLIGI ALIP GOSTERELIM
+    x=xmlDoc.getElementsByTagName("question");
+    let title=x[1].getElementsByTagName("text")[0].childNodes[0].nodeValue;
+    title=title.split("/").pop();
+    document.getElementById("title").innerText=title;
+        
+    //ILK SORU 2. KAYITTA. ONCEKILER KATEGORI BILGILERI
+    question_nu=2;
+    question_total=x.length-2;
+    
+    show_question();
+    
+      /*for (i=0;i<x.length;i++)
+      { 
+          if (i==2){
+               let qtext=x[i].getElementsByTagName("questiontext")[0].getElementsByTagName("text")[0].childNodes[0].nodeValue;
+              qtext=qtext.split("<strong>")[1].split("</strong>")[0];
+              document.getElementById("qtext").innerText=qtext;
+          }
+      }*/
+
+  }
+
+//XML DOSYASINDAN ALINAN STRING HTML KODU SEKLINDEYSE BU STRING ICINDEN METNI AYIKLAMAK ICIN
+function extractContent(s) {
+  var span = document.createElement('span');
+  span.innerHTML = s;
+  return span.textContent || span.innerText || "";
+};
+
+var correct_count=0;
+var wrong_count=0;
+
+function submit(){
+    is_correct="incorrect.";
+    correct_answer="";
+    
+    if (question_nu <= question_total+1)
+    {
+        var ele = document.getElementsByName('answer'); 
+        for(i = 0; i < ele.length; i++) { 
+            if(ele[i].checked){
+                if (ele[i].getAttribute("fraction")=="100") {
+                    is_correct="correct.";
+                }
+            }
+            if (ele[i].getAttribute("fraction")=="100"){
+                correct_answer=ele[i].value;
+            }
+        }
+        
+        if (is_correct=="correct."){
+            document.getElementById("feedback").style.backgroundColor = "#8fdef7";
+            correct_count += 1;
+        }else{
+            document.getElementById("feedback").style.backgroundColor = "#fcefdc";
+            wrong_count += 1;
+        }
+        document.getElementById("feedback").style.display="block";
+        document.getElementById("result").innerText=is_correct;
+        document.getElementById("correct").innerText=correct_answer;
+        
+
+    }
+}
+
+function next(){     
+    document.getElementById("feedback").style.display="none";
+     
+    question_nu += 1;  
+    if (question_nu > question_total +1)
+    {
+        document.getElementById("end").style.display="block";
+        document.getElementById("correct_count").innerText=correct_count;
+        document.getElementById("wrong_count").innerText=wrong_count;
+    } else{
+        var ele = document.getElementsByName("answer");
+        for(var i=0;i<ele.length;i++)
+          ele[i].checked = false;
+        show_question(); 
+    } 
+
+}
+
+function restart(){
+    document.getElementById("end").style.display="none";
+    question_nu=2;
+    correct_count=0;
+    wrong_count=0;
+    show_question();
+}
+
+function show_question(){
+    //SECILEN SORUYA AIT BILGILERI SAYFADA ILGILI YERLERE YAZ
+    
+    //SORU NU
+    document.getElementById("qno").innerText=(question_nu - 1) + "/" + question_total;
+    
+    //RESIM
+    let img=x[question_nu].getElementsByTagName("questiontext")[0].getElementsByTagName("file")[0].childNodes[0].nodeValue;
+    document.getElementById("img").src="data:image/png;base64," + img ;
+    
+    //SORU
+    let qtext=x[question_nu].getElementsByTagName("questiontext")[0].getElementsByTagName("text")[0].childNodes[0].data;
+    document.getElementById("qtext").innerText=extractContent(qtext);
+
+    //SIKLAR
+    var a;
+    var a=x[question_nu].getElementsByTagName("answer")[0].getElementsByTagName("text")[0].childNodes[0].data;
+    var fraction=x[question_nu].getElementsByTagName("answer")[0].getAttribute("fraction");
+    document.getElementById("a0").value=extractContent(a);
+    document.getElementById("label-a0").innerText=extractContent(a);
+    document.getElementById("a0").setAttribute("fraction",fraction);
+
+    a=x[question_nu].getElementsByTagName("answer")[1].getElementsByTagName("text")[0].childNodes[0].data;
+    fraction=x[question_nu].getElementsByTagName("answer")[1].getAttribute("fraction");
+    document.getElementById("a1").value=extractContent(a);
+    document.getElementById("label-a1").innerText=extractContent(a);
+    document.getElementById("a1").setAttribute("fraction",fraction);
+        
+    a=x[question_nu].getElementsByTagName("answer")[2].getElementsByTagName("text")[0].childNodes[0].data;
+    fraction=x[question_nu].getElementsByTagName("answer")[2].getAttribute("fraction");
+    document.getElementById("a2").value=extractContent(a);
+    document.getElementById("label-a2").innerText=extractContent(a);
+    document.getElementById("a2").setAttribute("fraction",fraction);
+        
+    a=x[question_nu].getElementsByTagName("answer")[3].getElementsByTagName("text")[0].childNodes[0].data;    
+    fraction=x[question_nu].getElementsByTagName("answer")[3].getAttribute("fraction");
+    document.getElementById("a3").value=extractContent(a);
+    document.getElementById("label-a3").innerText=extractContent(a);
+    document.getElementById("a3").setAttribute("fraction",fraction);
+}
+
+
+
+    window.onload = function() {
+        xmlhttp.open("GET","https://elearning2.gogodriving.com/zcode_demo_tests/en.xml",false);
+        xmlhttp.send();
+
+        var select = document.getElementById('select');
+        select.onchange = function() {
+            xmlDoc="";
+            x="";
+            xmlhttp.open("GET","https://elearning2.gogodriving.com/zcode_demo_tests/" + select.value + ".xml",false);
+            xmlhttp.send();
+            
+            //var select2=document.getElementsByClassName('goog-te-combo')[0];
+            changeLanguageByButtonClick();
+            /*if (select.value=="tr"){
+                document.getElementById("submit_btn").innerText="Gönder";
+            }*/
+            //select2.value=select.value;
+            //$(select2).val(select.value).trigger("onchange");
+            //$(select2).trigger();
+            //select2.options[select2.selectedIndex];
+            //setSelectedIndex(select2,select.value);
+            //$(select2).val(select.value).prop('selected', true);
+            //$(select2+' option:contains(select.value)').prop('selected', true);
+            /*
+            var nav_1;
+            var nav_2;
+            var nav_3;
+            
+            var feedback_1;
+            var feedback_2;
+            var feedback_nav_btn;
+            
+            var end_1;
+            var end_2;
+            var end_3;
+            var end_4;
+            var end_5;
+            
+            if(select.value=="tr"){
+                nav_1="Soru"
+                nav_2="Mevcut soruya bir cevap vermeli ve bir sonraki soruya geçmek için sorunun altındaki butonlara basmalısınız.";
+                nav_3="İki düşünün, bir kez cevaplayın!";
+                
+                feedback_1=
+                
+                end_1=
+                end_2=
+                end_3=
+                end_4=
+                end_5=
+            }
+            if(select.value=="en"){
+                
+            }
+            
+            
+            
+            document.getElementById("q").innerText=q;
+            document.getElementById("instructions_1").innerText=instructions_1;
+            document.getElementById("instructions_2").innerText=instructions_2;
+            
+            document.getElementById("end_sentence").innerText=end_sentence;
+            document.getElementById("correct_sentence").innerText=correct_sentence;
+            document.getElementById("wrong_sentence").innerText=wrong_sentence;
+            document.getElementById("restart_sentence").innerText=restart_sentence;
+            document.getElementById("retart_btn").value=restart_btn;*/
+        }
+    }
+    
+    
+    window.addEventListener('load', function() {
+	let message = { height: document.body.scrollHeight, width: document.body.scrollWidth };	
+
+	// window.top refers to parent window
+	window.top.postMessage(message, "*");
+});
+</script>
+
+</body>
+</html>
