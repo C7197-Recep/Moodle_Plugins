@@ -215,6 +215,7 @@ $renderer = $PAGE->get_renderer('core_user', 'myprofile');
 $tree = core_user\output\myprofile\manager::build_tree($user, $currentuser, $course);
 echo $renderer->render($tree);
 
+
 /********************COURSE OVERVIEW KISMI**************/
 $user_enroll_data = $DB->get_record('user_enrolments', array('userid'=>$id));
 $enrollment_start_date=date('m/d/Y', $user_enroll_data->timestart);
@@ -225,14 +226,17 @@ if ($user_enroll_data->timeend==0){
 
 $user_complete_data = $DB->get_record('course_completions', array('userid'=>$id));
 $completedate=date('m/d/Y', $user_complete_data->timecompleted);
+if ($user_complete_data->timecompleted==""){
+    $completedate="Not Completed";
+}     
 
 $user_final_grade = $DB->get_record_sql('SELECT * FROM {grade_grades} WHERE userid = ? AND finalgrade > 10', 
     [$id]);
-
 // $grade = grade_get_course_grade($userid, $courseid);
-
 $finalgrade=$user_final_grade->finalgrade;
-
+if ($finalgrade=="" || $user_complete_data->timecompleted==""){
+    $finalgrade="Not Completed";
+}     
 
 /*BUTUN NOTLARINI ICEREN TABLOYU GOSTERIR*/
 // require_once $CFG->libdir.'/gradelib.php';
@@ -244,15 +248,13 @@ $finalgrade=$user_final_grade->finalgrade;
 // }
 
 
-if ($finalgrade==""){
-    $finalgrade="Not Completed";
-}           
+      
 echo '<section class="node_category card d-inline-block w-100 mb-3">
         <div class="card-body">
             <h3 class="lead">Course Overview</h3>
             <ul>
                 <li>Course Start Date (mm/dd/yyyy) : '.$enrollment_start_date.'</li>
-                <li>Course End Date (mm/dd/yyyy) : '.$completedate.'</li>
+                <li>Course Completion Date (mm/dd/yyyy) : '.$completedate.'</li>
                 <li>Final Grade : '.$finalgrade.'</li>
             </ul>
         </div>
